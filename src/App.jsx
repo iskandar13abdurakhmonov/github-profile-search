@@ -3,7 +3,6 @@ import ProfileDetails from './components/ProfileDetails'
 import { UserProvider } from './context/ProfileContext'
 
 function App() {
-
     return (
         <UserProvider>
             <div className="wrapper">
@@ -12,8 +11,8 @@ function App() {
                 </header>
                 <main className="main">
                     <div className="main__container">
+                        <Form />
                         <ProfileDetails />
-                        <Form/>
                     </div>
                 </main>
                 <footer className="footer">
