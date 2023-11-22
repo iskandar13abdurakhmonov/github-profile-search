@@ -1,3 +1,4 @@
+import Form from './components/Form'
 import User from './components/User'
 import { UserProvider } from './context/ProfileContext'
 
@@ -12,6 +13,7 @@ function App() {
                 <main className="main">
                     <div className="main__container">
                         <User />
+                        <Form/>
                     </div>
                 </main>
                 <footer className="footer">

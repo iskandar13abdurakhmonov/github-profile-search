@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import { createContext, useContext, useEffect, useReducer } from 'react'
 
-const API_URL = 'https://api.github.com/users/Shmiklak'
+const API_URL = 'https://api.github.com/users'
 
 const UserContext = createContext()
 
@@ -34,19 +34,15 @@ function UserProvider({ children }) {
         initialState
     )
 
-    useEffect(() => {
-        const fetchUser = () => {
-            fetch('https://api.github.com/users/iskandar13abdurakhmonov')
-                .then((res) => res.json())
-                .then((data) =>
-                    dispatch({ type: 'user/loaded', payload: data })
-                )
-        }
-        fetchUser()
-    }, [])
+    const fetchUser = (userInput) => {
+        fetch(`https://api.github.com/users/${userInput}`)
+            .then((res) => res.json())
+            .then((data) => dispatch({ type: 'user/loaded', payload: data }))
+    }
+    
 
     return (
-        <UserContext.Provider value={{ user, repos, isLoading, error }}>
+        <UserContext.Provider value={{ user, repos, isLoading, error, fetchUser }}>
             {children}
         </UserContext.Provider>
     )
