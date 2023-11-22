@@ -1,11 +1,12 @@
 import { useUsers } from '../context/ProfileContext'
 
-export default function User() {
-    const { user } = useUsers()
+export default function ProfileDetails() {
+    const { user, repos } = useUsers()
 
     const avatar = user.avatar_url
 
     console.log(user)
+    console.log(repos)
 
     return (
         <div>

@@ -20,7 +20,7 @@ const reducer = (state, action) => {
         case 'user/loaded':
             return { ...state, isLoading: false, user: action.payload }
         case 'repo/loaded':
-            return { ...state, repo: action.payload, isLoading: false }
+            return { ...state, repos: action.payload, isLoading: false }
         case 'rejeted':
             return { ...state, error: action.payload, isLoading: false }
         default:
@@ -39,10 +39,17 @@ function UserProvider({ children }) {
             .then((res) => res.json())
             .then((data) => dispatch({ type: 'user/loaded', payload: data }))
     }
-    
+
+    const fetchRepos = (userInput) => {
+        fetch(`https://api.github.com/users/${userInput}/repos`)
+            .then((res) => res.json())
+            .then((data) => dispatch({ type: 'repo/loaded', payload: data }))
+    }
 
     return (
-        <UserContext.Provider value={{ user, repos, isLoading, error, fetchUser }}>
+        <UserContext.Provider
+            value={{ user, repos, isLoading, error, fetchUser, fetchRepos }}
+        >
             {children}
         </UserContext.Provider>
     )
